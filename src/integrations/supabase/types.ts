@@ -1653,6 +1653,142 @@ export type Database = {
           },
         ]
       }
+      lab_serial_counters: {
+        Row: {
+          kind: string
+          last_number: number
+          org_id: string
+          year: number
+        }
+        Insert: {
+          kind: string
+          last_number?: number
+          org_id: string
+          year: number
+        }
+        Update: {
+          kind?: string
+          last_number?: number
+          org_id?: string
+          year?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lab_serial_counters_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lab_settings: {
+        Row: {
+          created_at: string
+          id: string
+          org_id: string
+          report_footer: string | null
+          report_header: string | null
+          require_approval: boolean
+          serial_prefix: string
+          sla_hours: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          org_id: string
+          report_footer?: string | null
+          report_header?: string | null
+          require_approval?: boolean
+          serial_prefix?: string
+          sla_hours?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          org_id?: string
+          report_footer?: string | null
+          report_header?: string | null
+          require_approval?: boolean
+          serial_prefix?: string
+          sla_hours?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lab_settings_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: true
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lab_tests: {
+        Row: {
+          category_id: string | null
+          created_at: string
+          id: string
+          input_type: string
+          is_active: boolean
+          name: string
+          options: Json
+          org_id: string
+          price: number
+          reference_range: string | null
+          sort_order: number
+          unit: string | null
+          updated_at: string
+        }
+        Insert: {
+          category_id?: string | null
+          created_at?: string
+          id?: string
+          input_type?: string
+          is_active?: boolean
+          name: string
+          options?: Json
+          org_id: string
+          price?: number
+          reference_range?: string | null
+          sort_order?: number
+          unit?: string | null
+          updated_at?: string
+        }
+        Update: {
+          category_id?: string | null
+          created_at?: string
+          id?: string
+          input_type?: string
+          is_active?: boolean
+          name?: string
+          options?: Json
+          org_id?: string
+          price?: number
+          reference_range?: string | null
+          sort_order?: number
+          unit?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lab_tests_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "test_categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lab_tests_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       message_attachments: {
         Row: {
           created_at: string
@@ -2653,6 +2789,184 @@ export type Database = {
           },
         ]
       }
+      pharmacy_dispense_items: {
+        Row: {
+          created_at: string
+          dispense_id: string
+          drug_id: string | null
+          drug_name: string
+          id: string
+          org_id: string
+          quantity: number
+          total: number
+          unit_price: number
+        }
+        Insert: {
+          created_at?: string
+          dispense_id: string
+          drug_id?: string | null
+          drug_name: string
+          id?: string
+          org_id: string
+          quantity?: number
+          total?: number
+          unit_price?: number
+        }
+        Update: {
+          created_at?: string
+          dispense_id?: string
+          drug_id?: string | null
+          drug_name?: string
+          id?: string
+          org_id?: string
+          quantity?: number
+          total?: number
+          unit_price?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pharmacy_dispense_items_dispense_id_fkey"
+            columns: ["dispense_id"]
+            isOneToOne: false
+            referencedRelation: "pharmacy_dispenses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pharmacy_dispense_items_drug_id_fkey"
+            columns: ["drug_id"]
+            isOneToOne: false
+            referencedRelation: "pharmacy_drugs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pharmacy_dispense_items_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pharmacy_dispenses: {
+        Row: {
+          created_at: string
+          dispensed_by: string | null
+          id: string
+          invoice_id: string | null
+          notes: string | null
+          org_id: string
+          patient_id: string | null
+          patient_name: string
+          total_amount: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          dispensed_by?: string | null
+          id?: string
+          invoice_id?: string | null
+          notes?: string | null
+          org_id: string
+          patient_id?: string | null
+          patient_name: string
+          total_amount?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          dispensed_by?: string | null
+          id?: string
+          invoice_id?: string | null
+          notes?: string | null
+          org_id?: string
+          patient_id?: string | null
+          patient_name?: string
+          total_amount?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pharmacy_dispenses_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "invoices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pharmacy_dispenses_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pharmacy_dispenses_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pharmacy_drugs: {
+        Row: {
+          batch_number: string | null
+          created_at: string
+          expiry_date: string | null
+          form: string | null
+          generic_name: string | null
+          id: string
+          is_active: boolean
+          name: string
+          org_id: string
+          reorder_level: number
+          stock_quantity: number
+          strength: string | null
+          unit_price: number
+          updated_at: string
+        }
+        Insert: {
+          batch_number?: string | null
+          created_at?: string
+          expiry_date?: string | null
+          form?: string | null
+          generic_name?: string | null
+          id?: string
+          is_active?: boolean
+          name: string
+          org_id: string
+          reorder_level?: number
+          stock_quantity?: number
+          strength?: string | null
+          unit_price?: number
+          updated_at?: string
+        }
+        Update: {
+          batch_number?: string | null
+          created_at?: string
+          expiry_date?: string | null
+          form?: string | null
+          generic_name?: string | null
+          id?: string
+          is_active?: boolean
+          name?: string
+          org_id?: string
+          reorder_level?: number
+          stock_quantity?: number
+          strength?: string | null
+          unit_price?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pharmacy_drugs_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       platform_announcements: {
         Row: {
           content: string
@@ -3061,6 +3375,50 @@ export type Database = {
           },
         ]
       }
+      result_audit_log: {
+        Row: {
+          action: string
+          actor_id: string | null
+          created_at: string
+          details: Json
+          form_id: string | null
+          id: string
+          org_id: string
+          reason: string | null
+          serial: string | null
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          created_at?: string
+          details?: Json
+          form_id?: string | null
+          id?: string
+          org_id: string
+          reason?: string | null
+          serial?: string | null
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          created_at?: string
+          details?: Json
+          form_id?: string | null
+          id?: string
+          org_id?: string
+          reason?: string | null
+          serial?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "result_audit_log_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       revenue_allocation_rules: {
         Row: {
           category: string
@@ -3150,6 +3508,302 @@ export type Database = {
             columns: ["rule_id"]
             isOneToOne: false
             referencedRelation: "revenue_allocation_rules"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scan_activity_log: {
+        Row: {
+          action: string
+          actor_id: string | null
+          created_at: string
+          details: Json
+          id: string
+          org_id: string
+          scan_id: string | null
+          serial: string | null
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          created_at?: string
+          details?: Json
+          id?: string
+          org_id: string
+          scan_id?: string | null
+          serial?: string | null
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          created_at?: string
+          details?: Json
+          id?: string
+          org_id?: string
+          scan_id?: string | null
+          serial?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scan_activity_log_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scan_appointments: {
+        Row: {
+          body_part: string | null
+          created_at: string
+          id: string
+          modality: string
+          notes: string | null
+          org_id: string
+          patient_name: string
+          phone: string | null
+          scan_patient_id: string | null
+          scheduled_at: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          body_part?: string | null
+          created_at?: string
+          id?: string
+          modality: string
+          notes?: string | null
+          org_id: string
+          patient_name: string
+          phone?: string | null
+          scan_patient_id?: string | null
+          scheduled_at: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          body_part?: string | null
+          created_at?: string
+          id?: string
+          modality?: string
+          notes?: string | null
+          org_id?: string
+          patient_name?: string
+          phone?: string | null
+          scan_patient_id?: string | null
+          scheduled_at?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scan_appointments_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "scan_appointments_scan_patient_id_fkey"
+            columns: ["scan_patient_id"]
+            isOneToOne: false
+            referencedRelation: "scan_patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scan_images: {
+        Row: {
+          caption: string | null
+          created_at: string
+          id: string
+          org_id: string
+          scan_id: string
+          storage_path: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          org_id: string
+          scan_id: string
+          storage_path: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string
+          id?: string
+          org_id?: string
+          scan_id?: string
+          storage_path?: string
+          uploaded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scan_images_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "scan_images_scan_id_fkey"
+            columns: ["scan_id"]
+            isOneToOne: false
+            referencedRelation: "scans"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scan_patients: {
+        Row: {
+          address: string | null
+          age: string | null
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          mrn: string
+          notes: string | null
+          org_id: string
+          phone: string | null
+          sex: string | null
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          age?: string | null
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          mrn: string
+          notes?: string | null
+          org_id: string
+          phone?: string | null
+          sex?: string | null
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          age?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          mrn?: string
+          notes?: string | null
+          org_id?: string
+          phone?: string | null
+          sex?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scan_patients_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      scans: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          body_part: string | null
+          clinical_indication: string | null
+          created_at: string
+          created_by: string | null
+          findings: string | null
+          id: string
+          impression: string | null
+          invoice_id: string | null
+          is_urgent: boolean
+          modality: string
+          org_id: string
+          price: number
+          recommendation: string | null
+          referring_doctor: string | null
+          reported_at: string | null
+          reported_by: string | null
+          scan_patient_id: string | null
+          serial: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          body_part?: string | null
+          clinical_indication?: string | null
+          created_at?: string
+          created_by?: string | null
+          findings?: string | null
+          id?: string
+          impression?: string | null
+          invoice_id?: string | null
+          is_urgent?: boolean
+          modality: string
+          org_id: string
+          price?: number
+          recommendation?: string | null
+          referring_doctor?: string | null
+          reported_at?: string | null
+          reported_by?: string | null
+          scan_patient_id?: string | null
+          serial: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          body_part?: string | null
+          clinical_indication?: string | null
+          created_at?: string
+          created_by?: string | null
+          findings?: string | null
+          id?: string
+          impression?: string | null
+          invoice_id?: string | null
+          is_urgent?: boolean
+          modality?: string
+          org_id?: string
+          price?: number
+          recommendation?: string | null
+          referring_doctor?: string | null
+          reported_at?: string | null
+          reported_by?: string | null
+          scan_patient_id?: string | null
+          serial?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scans_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "invoices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "scans_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "scans_scan_patient_id_fkey"
+            columns: ["scan_patient_id"]
+            isOneToOne: false
+            referencedRelation: "scan_patients"
             referencedColumns: ["id"]
           },
         ]
@@ -3760,6 +4414,272 @@ export type Database = {
           },
         ]
       }
+      test_categories: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          name: string
+          org_id: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name: string
+          org_id: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          org_id?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "test_categories_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      test_form_items: {
+        Row: {
+          category_name: string | null
+          created_at: string
+          form_id: string
+          id: string
+          org_id: string
+          price: number
+          sort_order: number
+          test_id: string | null
+          test_name: string
+        }
+        Insert: {
+          category_name?: string | null
+          created_at?: string
+          form_id: string
+          id?: string
+          org_id: string
+          price?: number
+          sort_order?: number
+          test_id?: string | null
+          test_name: string
+        }
+        Update: {
+          category_name?: string | null
+          created_at?: string
+          form_id?: string
+          id?: string
+          org_id?: string
+          price?: number
+          sort_order?: number
+          test_id?: string | null
+          test_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "test_form_items_form_id_fkey"
+            columns: ["form_id"]
+            isOneToOne: false
+            referencedRelation: "test_forms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "test_form_items_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "test_form_items_test_id_fkey"
+            columns: ["test_id"]
+            isOneToOne: false
+            referencedRelation: "lab_tests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      test_forms: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          assigned_to: string | null
+          billing_entity: string | null
+          billing_type: string
+          clinical_notes: string | null
+          collected_at: string
+          completed_at: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          invoice_id: string | null
+          is_locked: boolean
+          org_id: string
+          patient_age: string | null
+          patient_id: string | null
+          patient_name: string
+          patient_phone: string | null
+          patient_sex: string | null
+          referring_doctor: string | null
+          referring_institution: string | null
+          serial: string
+          specimen: string | null
+          status: string
+          total_amount: number
+          updated_at: string
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          assigned_to?: string | null
+          billing_entity?: string | null
+          billing_type?: string
+          clinical_notes?: string | null
+          collected_at?: string
+          completed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          invoice_id?: string | null
+          is_locked?: boolean
+          org_id: string
+          patient_age?: string | null
+          patient_id?: string | null
+          patient_name: string
+          patient_phone?: string | null
+          patient_sex?: string | null
+          referring_doctor?: string | null
+          referring_institution?: string | null
+          serial: string
+          specimen?: string | null
+          status?: string
+          total_amount?: number
+          updated_at?: string
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          assigned_to?: string | null
+          billing_entity?: string | null
+          billing_type?: string
+          clinical_notes?: string | null
+          collected_at?: string
+          completed_at?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          invoice_id?: string | null
+          is_locked?: boolean
+          org_id?: string
+          patient_age?: string | null
+          patient_id?: string | null
+          patient_name?: string
+          patient_phone?: string | null
+          patient_sex?: string | null
+          referring_doctor?: string | null
+          referring_institution?: string | null
+          serial?: string
+          specimen?: string | null
+          status?: string
+          total_amount?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "test_forms_invoice_id_fkey"
+            columns: ["invoice_id"]
+            isOneToOne: false
+            referencedRelation: "invoices"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "test_forms_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "test_forms_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      test_results: {
+        Row: {
+          comment: string | null
+          created_at: string
+          entered_by: string | null
+          form_id: string
+          id: string
+          item_id: string | null
+          org_id: string
+          test_name: string
+          updated_at: string
+          values: Json
+        }
+        Insert: {
+          comment?: string | null
+          created_at?: string
+          entered_by?: string | null
+          form_id: string
+          id?: string
+          item_id?: string | null
+          org_id: string
+          test_name: string
+          updated_at?: string
+          values?: Json
+        }
+        Update: {
+          comment?: string | null
+          created_at?: string
+          entered_by?: string | null
+          form_id?: string
+          id?: string
+          item_id?: string | null
+          org_id?: string
+          test_name?: string
+          updated_at?: string
+          values?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "test_results_form_id_fkey"
+            columns: ["form_id"]
+            isOneToOne: false
+            referencedRelation: "test_forms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "test_results_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "test_form_items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "test_results_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       treatment_estimate_items: {
         Row: {
           created_at: string
@@ -4313,6 +5233,8 @@ export type Database = {
         Args: { _org_id: string; _user_id: string }
         Returns: Database["public"]["Enums"]["org_role"]
       }
+      get_public_result: { Args: { _serial: string }; Returns: Json }
+      get_public_scan: { Args: { _serial: string }; Returns: Json }
       has_org_access: {
         Args: { _org_id: string; _user_id: string }
         Returns: boolean
@@ -4325,6 +5247,10 @@ export type Database = {
         Returns: boolean
       }
       is_super_admin: { Args: { _user_id: string }; Returns: boolean }
+      next_lab_serial: {
+        Args: { _kind: string; _org_id: string; _prefix: string }
+        Returns: string
+      }
     }
     Enums: {
       clinic_type:
@@ -4336,6 +5262,7 @@ export type Database = {
         | "general"
         | "cardiology"
         | "ent"
+        | "diagnostic"
       org_role:
         | "owner"
         | "admin"
@@ -4483,6 +5410,7 @@ export const Constants = {
         "general",
         "cardiology",
         "ent",
+        "diagnostic",
       ],
       org_role: [
         "owner",
