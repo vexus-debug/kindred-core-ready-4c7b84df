@@ -10,7 +10,7 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.15"
+    PostgrestVersion: "14.5"
   }
   public: {
     Tables: {
@@ -641,6 +641,91 @@ export type Database = {
           },
         ]
       }
+      contact_lens_fittings: {
+        Row: {
+          aftercare_date: string | null
+          base_curve: number | null
+          created_at: string
+          diameter: number | null
+          fit_assessment: string | null
+          fitter_id: string | null
+          fitting_date: string
+          id: string
+          lens_brand: string | null
+          lens_type: string | null
+          modality: string | null
+          notes: string | null
+          org_id: string
+          patient_id: string
+          power_od: number | null
+          power_os: number | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          aftercare_date?: string | null
+          base_curve?: number | null
+          created_at?: string
+          diameter?: number | null
+          fit_assessment?: string | null
+          fitter_id?: string | null
+          fitting_date?: string
+          id?: string
+          lens_brand?: string | null
+          lens_type?: string | null
+          modality?: string | null
+          notes?: string | null
+          org_id: string
+          patient_id: string
+          power_od?: number | null
+          power_os?: number | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          aftercare_date?: string | null
+          base_curve?: number | null
+          created_at?: string
+          diameter?: number | null
+          fit_assessment?: string | null
+          fitter_id?: string | null
+          fitting_date?: string
+          id?: string
+          lens_brand?: string | null
+          lens_type?: string | null
+          modality?: string | null
+          notes?: string | null
+          org_id?: string
+          patient_id?: string
+          power_od?: number | null
+          power_os?: number | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_lens_fittings_fitter_id_fkey"
+            columns: ["fitter_id"]
+            isOneToOne: false
+            referencedRelation: "staff"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_lens_fittings_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_lens_fittings_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       dental_chart_entries: {
         Row: {
           condition: string | null
@@ -814,6 +899,211 @@ export type Database = {
             columns: ["org_id"]
             isOneToOne: false
             referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      eye_diagnostics: {
+        Row: {
+          created_at: string
+          eye: string
+          eye_exam_id: string | null
+          file_name: string | null
+          file_url: string | null
+          findings: string | null
+          id: string
+          org_id: string
+          patient_id: string
+          performed_by: string | null
+          study_date: string
+          study_type: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          eye?: string
+          eye_exam_id?: string | null
+          file_name?: string | null
+          file_url?: string | null
+          findings?: string | null
+          id?: string
+          org_id: string
+          patient_id: string
+          performed_by?: string | null
+          study_date?: string
+          study_type: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          eye?: string
+          eye_exam_id?: string | null
+          file_name?: string | null
+          file_url?: string | null
+          findings?: string | null
+          id?: string
+          org_id?: string
+          patient_id?: string
+          performed_by?: string | null
+          study_date?: string
+          study_type?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "eye_diagnostics_eye_exam_id_fkey"
+            columns: ["eye_exam_id"]
+            isOneToOne: false
+            referencedRelation: "eye_exams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "eye_diagnostics_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "eye_diagnostics_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "eye_diagnostics_performed_by_fkey"
+            columns: ["performed_by"]
+            isOneToOne: false
+            referencedRelation: "staff"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      eye_exams: {
+        Row: {
+          anterior_segment_od: string | null
+          anterior_segment_os: string | null
+          appointment_id: string | null
+          cd_ratio_od: number | null
+          cd_ratio_os: number | null
+          chief_complaint: string | null
+          created_at: string
+          diagnosis: string | null
+          dilated: boolean
+          exam_date: string
+          examiner_id: string | null
+          fundus_od: string | null
+          fundus_os: string | null
+          id: string
+          iop_method: string | null
+          iop_od: number | null
+          iop_os: number | null
+          notes: string | null
+          org_id: string
+          patient_id: string
+          plan: string | null
+          pupils_od: string | null
+          pupils_os: string | null
+          updated_at: string
+          va_aided_od: string | null
+          va_aided_os: string | null
+          va_pinhole_od: string | null
+          va_pinhole_os: string | null
+          va_unaided_od: string | null
+          va_unaided_os: string | null
+        }
+        Insert: {
+          anterior_segment_od?: string | null
+          anterior_segment_os?: string | null
+          appointment_id?: string | null
+          cd_ratio_od?: number | null
+          cd_ratio_os?: number | null
+          chief_complaint?: string | null
+          created_at?: string
+          diagnosis?: string | null
+          dilated?: boolean
+          exam_date?: string
+          examiner_id?: string | null
+          fundus_od?: string | null
+          fundus_os?: string | null
+          id?: string
+          iop_method?: string | null
+          iop_od?: number | null
+          iop_os?: number | null
+          notes?: string | null
+          org_id: string
+          patient_id: string
+          plan?: string | null
+          pupils_od?: string | null
+          pupils_os?: string | null
+          updated_at?: string
+          va_aided_od?: string | null
+          va_aided_os?: string | null
+          va_pinhole_od?: string | null
+          va_pinhole_os?: string | null
+          va_unaided_od?: string | null
+          va_unaided_os?: string | null
+        }
+        Update: {
+          anterior_segment_od?: string | null
+          anterior_segment_os?: string | null
+          appointment_id?: string | null
+          cd_ratio_od?: number | null
+          cd_ratio_os?: number | null
+          chief_complaint?: string | null
+          created_at?: string
+          diagnosis?: string | null
+          dilated?: boolean
+          exam_date?: string
+          examiner_id?: string | null
+          fundus_od?: string | null
+          fundus_os?: string | null
+          id?: string
+          iop_method?: string | null
+          iop_od?: number | null
+          iop_os?: number | null
+          notes?: string | null
+          org_id?: string
+          patient_id?: string
+          plan?: string | null
+          pupils_od?: string | null
+          pupils_os?: string | null
+          updated_at?: string
+          va_aided_od?: string | null
+          va_aided_os?: string | null
+          va_pinhole_od?: string | null
+          va_pinhole_os?: string | null
+          va_unaided_od?: string | null
+          va_unaided_os?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "eye_exams_appointment_id_fkey"
+            columns: ["appointment_id"]
+            isOneToOne: false
+            referencedRelation: "appointments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "eye_exams_examiner_id_fkey"
+            columns: ["examiner_id"]
+            isOneToOne: false
+            referencedRelation: "staff"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "eye_exams_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "eye_exams_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
             referencedColumns: ["id"]
           },
         ]
@@ -1548,6 +1838,213 @@ export type Database = {
           },
         ]
       }
+      optical_orders: {
+        Row: {
+          amount_paid: number
+          created_at: string
+          delivered_date: string | null
+          frame_brand: string | null
+          frame_model: string | null
+          frame_price: number
+          id: string
+          lab_name: string | null
+          lens_coatings: string | null
+          lens_price: number
+          lens_type: string | null
+          notes: string | null
+          order_date: string
+          order_number: string | null
+          org_id: string
+          patient_id: string
+          prescription_id: string | null
+          promised_date: string | null
+          status: string
+          total_amount: number
+          updated_at: string
+        }
+        Insert: {
+          amount_paid?: number
+          created_at?: string
+          delivered_date?: string | null
+          frame_brand?: string | null
+          frame_model?: string | null
+          frame_price?: number
+          id?: string
+          lab_name?: string | null
+          lens_coatings?: string | null
+          lens_price?: number
+          lens_type?: string | null
+          notes?: string | null
+          order_date?: string
+          order_number?: string | null
+          org_id: string
+          patient_id: string
+          prescription_id?: string | null
+          promised_date?: string | null
+          status?: string
+          total_amount?: number
+          updated_at?: string
+        }
+        Update: {
+          amount_paid?: number
+          created_at?: string
+          delivered_date?: string | null
+          frame_brand?: string | null
+          frame_model?: string | null
+          frame_price?: number
+          id?: string
+          lab_name?: string | null
+          lens_coatings?: string | null
+          lens_price?: number
+          lens_type?: string | null
+          notes?: string | null
+          order_date?: string
+          order_number?: string | null
+          org_id?: string
+          patient_id?: string
+          prescription_id?: string | null
+          promised_date?: string | null
+          status?: string
+          total_amount?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "optical_orders_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "optical_orders_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "optical_orders_prescription_id_fkey"
+            columns: ["prescription_id"]
+            isOneToOne: false
+            referencedRelation: "optical_prescriptions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      optical_prescriptions: {
+        Row: {
+          add_od: number | null
+          add_os: number | null
+          axis_od: number | null
+          axis_os: number | null
+          base_curve: number | null
+          created_at: string
+          cylinder_od: number | null
+          cylinder_os: number | null
+          diameter: number | null
+          expiry_date: string | null
+          eye_exam_id: string | null
+          id: string
+          issue_date: string
+          lens_brand: string | null
+          notes: string | null
+          org_id: string
+          patient_id: string
+          pd: number | null
+          prescriber_id: string | null
+          prism_od: string | null
+          prism_os: string | null
+          rx_type: string
+          sphere_od: number | null
+          sphere_os: number | null
+          updated_at: string
+        }
+        Insert: {
+          add_od?: number | null
+          add_os?: number | null
+          axis_od?: number | null
+          axis_os?: number | null
+          base_curve?: number | null
+          created_at?: string
+          cylinder_od?: number | null
+          cylinder_os?: number | null
+          diameter?: number | null
+          expiry_date?: string | null
+          eye_exam_id?: string | null
+          id?: string
+          issue_date?: string
+          lens_brand?: string | null
+          notes?: string | null
+          org_id: string
+          patient_id: string
+          pd?: number | null
+          prescriber_id?: string | null
+          prism_od?: string | null
+          prism_os?: string | null
+          rx_type?: string
+          sphere_od?: number | null
+          sphere_os?: number | null
+          updated_at?: string
+        }
+        Update: {
+          add_od?: number | null
+          add_os?: number | null
+          axis_od?: number | null
+          axis_os?: number | null
+          base_curve?: number | null
+          created_at?: string
+          cylinder_od?: number | null
+          cylinder_os?: number | null
+          diameter?: number | null
+          expiry_date?: string | null
+          eye_exam_id?: string | null
+          id?: string
+          issue_date?: string
+          lens_brand?: string | null
+          notes?: string | null
+          org_id?: string
+          patient_id?: string
+          pd?: number | null
+          prescriber_id?: string | null
+          prism_od?: string | null
+          prism_os?: string | null
+          rx_type?: string
+          sphere_od?: number | null
+          sphere_os?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "optical_prescriptions_eye_exam_id_fkey"
+            columns: ["eye_exam_id"]
+            isOneToOne: false
+            referencedRelation: "eye_exams"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "optical_prescriptions_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "optical_prescriptions_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "optical_prescriptions_prescriber_id_fkey"
+            columns: ["prescriber_id"]
+            isOneToOne: false
+            referencedRelation: "staff"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       org_members: {
         Row: {
           created_at: string
@@ -1791,6 +2288,60 @@ export type Database = {
           },
           {
             foreignKeyName: "patient_images_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      patient_recalls: {
+        Row: {
+          created_at: string
+          due_date: string
+          id: string
+          last_contacted_at: string | null
+          notes: string | null
+          org_id: string
+          patient_id: string
+          recall_type: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          due_date: string
+          id?: string
+          last_contacted_at?: string | null
+          notes?: string | null
+          org_id: string
+          patient_id: string
+          recall_type: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          due_date?: string
+          id?: string
+          last_contacted_at?: string | null
+          notes?: string | null
+          org_id?: string
+          patient_id?: string
+          recall_type?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "patient_recalls_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "patient_recalls_patient_id_fkey"
             columns: ["patient_id"]
             isOneToOne: false
             referencedRelation: "patients"
@@ -3124,6 +3675,91 @@ export type Database = {
           },
         ]
       }
+      surgery_bookings: {
+        Row: {
+          biometry_notes: string | null
+          consent_signed: boolean
+          created_at: string
+          eye: string
+          id: string
+          iol_model: string | null
+          iol_power: number | null
+          org_id: string
+          outcome_notes: string | null
+          patient_id: string
+          preop_checklist: Json
+          procedure_name: string
+          scheduled_date: string | null
+          scheduled_time: string | null
+          status: string
+          surgeon_id: string | null
+          theatre: string | null
+          updated_at: string
+        }
+        Insert: {
+          biometry_notes?: string | null
+          consent_signed?: boolean
+          created_at?: string
+          eye?: string
+          id?: string
+          iol_model?: string | null
+          iol_power?: number | null
+          org_id: string
+          outcome_notes?: string | null
+          patient_id: string
+          preop_checklist?: Json
+          procedure_name: string
+          scheduled_date?: string | null
+          scheduled_time?: string | null
+          status?: string
+          surgeon_id?: string | null
+          theatre?: string | null
+          updated_at?: string
+        }
+        Update: {
+          biometry_notes?: string | null
+          consent_signed?: boolean
+          created_at?: string
+          eye?: string
+          id?: string
+          iol_model?: string | null
+          iol_power?: number | null
+          org_id?: string
+          outcome_notes?: string | null
+          patient_id?: string
+          preop_checklist?: Json
+          procedure_name?: string
+          scheduled_date?: string | null
+          scheduled_time?: string | null
+          status?: string
+          surgeon_id?: string | null
+          theatre?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "surgery_bookings_org_id_fkey"
+            columns: ["org_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "surgery_bookings_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "surgery_bookings_surgeon_id_fkey"
+            columns: ["surgeon_id"]
+            isOneToOne: false
+            referencedRelation: "staff"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       treatment_estimate_items: {
         Row: {
           created_at: string
@@ -3726,12 +4362,12 @@ export type Tables<
   DefaultSchemaTableNameOrOptions extends
     | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
         DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -3755,11 +4391,11 @@ export type TablesInsert<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -3780,11 +4416,11 @@ export type TablesUpdate<
   DefaultSchemaTableNameOrOptions extends
     | keyof DefaultSchema["Tables"]
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -3805,11 +4441,11 @@ export type Enums<
   DefaultSchemaEnumNameOrOptions extends
     | keyof DefaultSchema["Enums"]
     | { schema: keyof DatabaseWithoutInternals },
-  EnumName extends DefaultSchemaEnumNameOrOptions extends {
+  EnumName extends (DefaultSchemaEnumNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaEnumNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
@@ -3822,11 +4458,11 @@ export type CompositeTypes<
   PublicCompositeTypeNameOrOptions extends
     | keyof DefaultSchema["CompositeTypes"]
     | { schema: keyof DatabaseWithoutInternals },
-  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+  CompositeTypeName extends (PublicCompositeTypeNameOrOptions extends {
     schema: keyof DatabaseWithoutInternals
   }
     ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
-    : never = never,
+    : never) = never,
 > = PublicCompositeTypeNameOrOptions extends {
   schema: keyof DatabaseWithoutInternals
 }
